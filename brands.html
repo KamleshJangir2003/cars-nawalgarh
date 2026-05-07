@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Brands — AutoReview</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── BRAND FILTER TABS ── */
+    .brand-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .brand-tab { padding: 8px 22px; border: 2px solid #ddd; background: #fff; border-radius: 25px; cursor: pointer; font-family: inherit; font-size: 0.88rem; font-weight: 600; transition: all 0.2s; color: #444; }
+    .brand-tab:hover, .brand-tab.active { border-color: #e63946; background: #e63946; color: #fff; }
+
+    /* ── BRAND SECTION ── */
+    .brand-section { margin-bottom: 56px; }
+    .brand-section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #f0f0f0; }
+    .brand-icon-wrap { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; background: #f8f8f8; border: 2px solid #eee; flex-shrink: 0; }
+    .brand-section-header h2 { font-size: 1.5rem; font-weight: 700; margin: 0; }
+    .brand-total-badge { margin-left: auto; background: #111; color: #fff; font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+
+    /* ── CAR CARDS (reuse existing + override) ── */
+    .brand-cars-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .brand-car-card { border-radius: 12px; overflow: hidden; box-shadow: 0 3px 14px rgba(0,0,0,0.09); background: #fff; transition: transform 0.2s, box-shadow 0.2s; }
+    .brand-car-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.14); }
+    .brand-car-card img { width: 100%; height: 190px; object-fit: cover; }
+    .brand-car-card .card-body { padding: 16px 18px; }
+    .brand-car-card .card-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .card-meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #777; margin-bottom: 8px; }
+    .card-rating { color: #f4a261; font-weight: 700; font-size: 0.88rem; }
+    .card-desc { font-size: 0.85rem; color: #555; line-height: 1.55; margin-bottom: 14px; }
+    .card-footer-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-top: 1px solid #f0f0f0; }
+    .card-price { font-weight: 700; color: #e63946; font-size: 1rem; }
+
+    /* ── HERO STATS ── */
+    .brands-hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+    .bhs-item { text-align: center; }
+    .bhs-num { font-size: 1.8rem; font-weight: 700; color: #e63946; }
+    .bhs-label { font-size: 0.82rem; color: #aaa; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo">Auto<span>Review</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="brands.html" class="active">Brands</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="submit.html" class="nav-btn">Write Review</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>Browse by Brand</h1>
+  <p>Explore cars from all major brands — click any car to read its full review</p>
+  <div class="brands-hero-stats">
+    <div class="bhs-item"><div class="bhs-num" id="totalBrands">9</div><div class="bhs-label">Brands</div></div>
+    <div class="bhs-item"><div class="bhs-num" id="totalCars">0</div><div class="bhs-label">Cars Listed</div></div>
+    <div class="bhs-item"><div class="bhs-num" id="totalReviews">0</div><div class="bhs-label">Total Reviews</div></div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <!-- Brand filter tabs -->
+    <div class="brand-tabs" id="brandTabs"></div>
+    <!-- Brand sections -->
+    <div id="brandSections"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Auto<span>Review</span></a>
+      <p>India's most trusted car review platform. Helping you make smarter car buying decisions since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="reviews.html">All Reviews</a></li>
+        <li><a href="brands.html">Brands</a></li>
+        <li><a href="submit.html">Write Review</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="reviews.html?cat=suv">SUV</a></li>
+        <li><a href="reviews.html?cat=sedan">Sedan</a></li>
+        <li><a href="reviews.html?cat=electric">Electric</a></li>
+        <li><a href="reviews.html?cat=luxury">Luxury</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 AutoReview. All rights reserved.</span>
+    <span>Made with ❤️ for car lovers</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // ── ALL BRAND DATA WITH CARS ──
+  const brandsData = [
+    {
+      name: 'Maruti Suzuki', icon: '🟢', origin: 'India / Japan',
+      cars: [
+        { name: 'Swift 2024', cat: 'Hatchback', fuel: 'Petrol / CNG', rating: '4.6', price: '₹6.49 Lakh', img: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600', desc: 'India\'s best-selling hatchback with 22 km/l mileage, sporty design and peppy engine.', id: 'swift' },
+        { name: 'Baleno 2024', cat: 'Hatchback', fuel: 'Petrol', rating: '4.4', price: '₹6.61 Lakh', img: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600', desc: 'Premium hatchback with a spacious cabin, heads-up display and smooth CVT gearbox.', id: 'baleno' },
+        { name: 'Brezza 2024', cat: 'SUV', fuel: 'Petrol / CNG', rating: '4.3', price: '₹8.34 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Compact SUV with a bold look, strong safety ratings and excellent fuel economy.', id: 'brezza' },
+      ]
+    },
+    {
+      name: 'Hyundai', icon: '🔷', origin: 'South Korea',
+      cars: [
+        { name: 'Creta 2024', cat: 'SUV', fuel: 'Petrol / Diesel / CNG', rating: '4.4', price: '₹11.11 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'India\'s most popular SUV with panoramic sunroof, Level 2 ADAS and premium cabin.', id: 'creta' },
+        { name: 'i20 2024', cat: 'Hatchback', fuel: 'Petrol / Diesel', rating: '4.3', price: '₹7.04 Lakh', img: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600', desc: 'Feature-loaded premium hatchback with a sporty design and connected car tech.', id: 'i20' },
+        { name: 'Verna 2024', cat: 'Sedan', fuel: 'Petrol', rating: '4.5', price: '₹10.90 Lakh', img: 'https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=600', desc: 'Stunning new-gen Verna with ADAS, panoramic sunroof and a powerful turbo engine.', id: 'verna' },
+      ]
+    },
+    {
+      name: 'Tata', icon: '🔵', origin: 'India',
+      cars: [
+        { name: 'Nexon EV 2024', cat: 'Electric SUV', fuel: 'Electric', rating: '4.5', price: '₹14.74 Lakh', img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600', desc: 'India\'s best-selling EV with 465 km range, fast charging and a feature-rich cabin.', id: 'nexonev' },
+        { name: 'Punch 2024', cat: 'Micro SUV', fuel: 'Petrol / CNG', rating: '4.4', price: '₹6.13 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: '5-star safety rated micro SUV with a bold stance and best-in-class safety features.', id: 'punch' },
+        { name: 'Harrier 2024', cat: 'SUV', fuel: 'Diesel', rating: '4.3', price: '₹15.49 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Premium diesel SUV with a commanding presence, panoramic sunroof and ADAS.', id: 'harrier' },
+      ]
+    },
+    {
+      name: 'Mahindra', icon: '🟥', origin: 'India',
+      cars: [
+        { name: 'Scorpio-N 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.3', price: '₹13.99 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'True-blue SUV with a powerful diesel engine, 4WD capability and commanding road presence.', id: 'scorpion' },
+        { name: 'XUV 3XO 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.4', price: '₹7.49 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Feature-packed compact SUV with ADAS, panoramic sunroof and a sporty design.', id: 'xuv3xo' },
+        { name: 'Thar Roxx 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.6', price: '₹12.99 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: 'The iconic off-roader now with 4 doors, modern features and serious 4x4 capability.', id: 'tharroxx' },
+      ]
+    },
+    {
+      name: 'Honda', icon: '⚪', origin: 'Japan',
+      cars: [
+        { name: 'City 2024', cat: 'Sedan', fuel: 'Petrol / Hybrid', rating: '4.7', price: '₹11.78 Lakh', img: 'https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=600', desc: 'Benchmark mid-size sedan with a spacious cabin, refined engine and excellent build quality.', id: 'city' },
+        { name: 'Elevate 2024', cat: 'SUV', fuel: 'Petrol', rating: '4.3', price: '₹11.69 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Honda\'s first SUV in India with a premium cabin, smooth CVT and Honda Sensing safety suite.', id: 'elevate' },
+      ]
+    },
+    {
+      name: 'BMW', icon: '🔵', origin: 'Germany',
+      cars: [
+        { name: '3 Series 2024', cat: 'Sedan', fuel: 'Petrol / Diesel', rating: '4.8', price: '₹46.9 Lakh', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600', desc: 'The ultimate sports sedan with razor-sharp handling, a luxurious cabin and cutting-edge tech.', id: 'bmw3' },
+        { name: 'X1 2024', cat: 'SUV', fuel: 'Petrol / Electric', rating: '4.6', price: '₹45.9 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Premium compact SUV with a stunning curved display, powerful engine and sporty dynamics.', id: 'bmwx1' },
+      ]
+    },
+    {
+      name: 'Mercedes', icon: '⭐', origin: 'Germany',
+      cars: [
+        { name: 'C-Class 2024', cat: 'Luxury Sedan', fuel: 'Petrol', rating: '4.9', price: '₹57.0 Lakh', img: 'https://images.unsplash.com/photo-1563720223185-11003d516935?w=600', desc: 'S-Class luxury in a compact package. Stunning interior, smooth ride and a massive MBUX screen.', id: 'cclass' },
+        { name: 'GLA 2024', cat: 'Luxury SUV', fuel: 'Petrol', rating: '4.7', price: '₹50.5 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Compact luxury SUV with a premium cabin, AMG styling and advanced driver assistance.', id: 'gla' },
+      ]
+    },
+    {
+      name: 'Kia', icon: '🟣', origin: 'South Korea',
+      cars: [
+        { name: 'Seltos 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.4', price: '₹10.90 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Premium SUV with a bold design, dual panoramic displays and a feature-loaded cabin.', id: 'seltos' },
+        { name: 'Sonet 2024', cat: 'Compact SUV', fuel: 'Petrol / Diesel', rating: '4.3', price: '₹7.99 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: 'Feature-packed compact SUV with a sporty design, ventilated seats and ADAS safety.', id: 'sonet' },
+      ]
+    },
+    {
+      name: 'Porsche', icon: '🏎️', origin: 'Germany',
+      cars: [
+        { name: '911 Carrera 2024', cat: 'Sports', fuel: 'Petrol', rating: '5.0', price: '₹1.89 Cr', img: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600', desc: 'The icon of sports cars. Breathtaking performance, timeless design and everyday usability.', id: 'porsche911' },
+        { name: 'Cayenne 2024', cat: 'Luxury SUV', fuel: 'Petrol / Hybrid', rating: '4.8', price: '₹1.32 Cr', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'The SUV that drives like a sports car. Stunning performance with a luxurious cabin.', id: 'cayenne' },
+      ]
+    },
+    {
+      name: 'Toyota', icon: '🔴', origin: 'Japan',
+      cars: [
+        { name: 'Fortuner 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.6', price: '₹33.43 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'India\'s most aspirational SUV with legendary reliability, powerful diesel engine and 4WD.', id: 'fortuner' },
+        { name: 'Innova HyCross 2024', cat: 'MPV', fuel: 'Petrol Hybrid', rating: '4.7', price: '₹19.77 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: 'Premium hybrid MPV with 23 km/l efficiency, spacious 7-seater cabin and strong hybrid tech.', id: 'innovahycross' },
+        { name: 'Urban Cruiser Hyryder 2024', cat: 'SUV', fuel: 'Petrol / Hybrid', rating: '4.4', price: '₹10.73 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Stylish mid-size SUV with strong hybrid option delivering 27 km/l and a premium cabin.', id: 'hyryder' },
+      ]
+    },
+    {
+      name: 'Audi', icon: '⚫', origin: 'Germany',
+      cars: [
+        { name: 'A4 2024', cat: 'Luxury Sedan', fuel: 'Petrol', rating: '4.7', price: '₹42.34 Lakh', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600', desc: 'Sophisticated luxury sedan with a stunning Virtual Cockpit, quattro AWD and refined ride.', id: 'audi-a4' },
+        { name: 'Q5 2024', cat: 'Luxury SUV', fuel: 'Petrol', rating: '4.8', price: '₹67.81 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Premium mid-size SUV with quattro AWD, a panoramic sunroof and a tech-loaded cabin.', id: 'audi-q5' },
+        { name: 'e-tron GT 2024', cat: 'Electric', fuel: 'Electric', rating: '4.9', price: '₹1.69 Cr', img: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600', desc: 'Stunning electric grand tourer with 598 hp, 0-100 in 3.3s and a breathtaking design.', id: 'etrongt' },
+      ]
+    },
+    {
+      name: 'Volkswagen', icon: '🔘', origin: 'Germany',
+      cars: [
+        { name: 'Taigun 2024', cat: 'SUV', fuel: 'Petrol', rating: '4.4', price: '₹11.56 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'German-engineered compact SUV with a punchy turbo engine, solid build and premium feel.', id: 'taigun' },
+        { name: 'Virtus 2024', cat: 'Sedan', fuel: 'Petrol', rating: '4.5', price: '₹11.56 Lakh', img: 'https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=600', desc: 'Best-in-class sedan with a 1.5L turbo engine, spacious boot and European build quality.', id: 'virtus' },
+      ]
+    },
+    {
+      name: 'Skoda', icon: '🟩', origin: 'Czech Republic',
+      cars: [
+        { name: 'Kushaq 2024', cat: 'SUV', fuel: 'Petrol', rating: '4.3', price: '₹11.89 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: 'Simply Clever SUV with a 1.5 TSI turbo engine, solid build quality and European safety standards.', id: 'kushaq' },
+        { name: 'Slavia 2024', cat: 'Sedan', fuel: 'Petrol', rating: '4.4', price: '₹11.49 Lakh', img: 'https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=600', desc: 'Spacious sedan with the largest boot in its class, powerful turbo engine and premium interiors.', id: 'slavia' },
+      ]
+    },
+    {
+      name: 'MG', icon: '🔴', origin: 'UK / China',
+      cars: [
+        { name: 'ZS EV 2024', cat: 'Electric SUV', fuel: 'Electric', rating: '4.2', price: '₹18.98 Lakh', img: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600', desc: 'Feature-loaded electric SUV with 461 km range, panoramic sunroof and a premium cabin.', id: 'zsev' },
+        { name: 'Hector 2024', cat: 'SUV', fuel: 'Petrol / Diesel / CNG', rating: '4.3', price: '₹13.99 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'India\'s internet car with a massive 14-inch screen, panoramic sunroof and 6-seater option.', id: 'hector' },
+        { name: 'Comet EV 2024', cat: 'Electric', fuel: 'Electric', rating: '4.0', price: '₹6.99 Lakh', img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600', desc: 'India\'s most affordable electric car with a quirky design, perfect for city commutes.', id: 'comet' },
+      ]
+    },
+    {
+      name: 'Renault', icon: '🔶', origin: 'France',
+      cars: [
+        { name: 'Kwid 2024', cat: 'Hatchback', fuel: 'Petrol / CNG', rating: '4.0', price: '₹4.70 Lakh', img: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600', desc: 'Budget-friendly hatchback with an SUV-inspired design, high ground clearance and low running cost.', id: 'kwid' },
+        { name: 'Kiger 2024', cat: 'SUV', fuel: 'Petrol', rating: '4.2', price: '₹6.00 Lakh', img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', desc: 'Stylish compact SUV with a turbo engine, large touchscreen and best-in-class boot space.', id: 'kiger' },
+      ]
+    },
+    {
+      name: 'Jeep', icon: '🟫', origin: 'USA',
+      cars: [
+        { name: 'Compass 2024', cat: 'SUV', fuel: 'Petrol / Diesel', rating: '4.3', price: '₹19.99 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Premium SUV with authentic Jeep off-road capability, a refined cabin and powerful engines.', id: 'compass' },
+        { name: 'Meridian 2024', cat: 'SUV', fuel: 'Diesel', rating: '4.4', price: '₹29.90 Lakh', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600', desc: '7-seater premium SUV with a powerful diesel engine, 4WD and a luxurious 3-row cabin.', id: 'meridian' },
+      ]
+    },
+    {
+      name: 'Volvo', icon: '🔵', origin: 'Sweden',
+      cars: [
+        { name: 'XC40 Recharge 2024', cat: 'Electric SUV', fuel: 'Electric', rating: '4.7', price: '₹55.90 Lakh', img: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600', desc: 'Safest electric SUV with a 418 km range, Scandinavian design and Google-powered infotainment.', id: 'xc40' },
+        { name: 'XC90 2024', cat: 'Luxury SUV', fuel: 'Petrol / Hybrid', rating: '4.9', price: '₹98.90 Lakh', img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600', desc: 'Flagship 7-seater luxury SUV with world-class safety, a stunning interior and plug-in hybrid option.', id: 'xc90' },
+      ]
+    },
+  ];
+
+  // ── COUNT USER REVIEWS PER BRAND ──
+  const userReviews = JSON.parse(localStorage.getItem('carReviews')) || [];
+  function userReviewCount(brandName) {
+    return userReviews.filter(r => r.carName.toLowerCase().startsWith(brandName.split(' ')[0].toLowerCase())).length;
+  }
+
+  // ── UPDATE HERO STATS ──
+  const totalCars = brandsData.reduce((s, b) => s + b.cars.length, 0);
+  const totalReviews = brandsData.reduce((s, b) => s + b.cars.length + userReviewCount(b.name), 0);
+  document.getElementById('totalBrands').textContent = brandsData.length;
+  document.getElementById('totalCars').textContent = totalCars;
+  document.getElementById('totalReviews').textContent = totalReviews + '+';
+
+  // ── BUILD BRAND TABS ──
+  const tabsEl = document.getElementById('brandTabs');
+  tabsEl.innerHTML = `<button class="brand-tab active" onclick="filterBrand('all', this)">All Brands</button>` +
+    brandsData.map(b => `<button class="brand-tab" onclick="filterBrand('${b.name}', this)">${b.icon} ${b.name}</button>`).join('');
+
+  // ── BUILD BRAND SECTIONS ──
+  const sectionsEl = document.getElementById('brandSections');
+  sectionsEl.innerHTML = brandsData.map(b => {
+    const uCount = userReviewCount(b.name);
+    const totalCount = b.cars.length + uCount;
+    return `
+    <div class="brand-section" id="brand-${b.name.replace(/\s/g,'')}">
+      <div class="brand-section-header">
+        <div class="brand-icon-wrap">${b.icon}</div>
+        <div>
+          <h2>${b.name}</h2>
+          <span style="font-size:0.82rem;color:#888;">${b.origin}</span>
+        </div>
+        <span class="brand-total-badge">${totalCount} Review${totalCount > 1 ? 's' : ''}</span>
+      </div>
+      <div class="brand-cars-grid">
+        ${b.cars.map(car => `
+          <div class="brand-car-card">
+            <img src="${car.img}" alt="${b.name} ${car.name}" loading="lazy">
+            <div class="card-body">
+              <h3>${b.name} ${car.name}</h3>
+              <div class="card-meta-row">
+                <span>${car.cat} · ${car.fuel}</span>
+                <span class="card-rating">★ ${car.rating}</span>
+              </div>
+              <p class="card-desc">${car.desc}</p>
+            </div>
+            <div class="card-footer-row">
+              <span class="card-price">${car.price}</span>
+              <a href="reviews.html?brand=${encodeURIComponent(b.name.split(' ')[0])}" class="btn-sm">Reviews</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  // ── FILTER FUNCTION ──
+  function filterBrand(name, btn) {
+    document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.brand-section').forEach(sec => {
+      sec.style.display = (name === 'all' || sec.id === 'brand-' + name.replace(/\s/g,'')) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

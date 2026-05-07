@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoReview — India's #1 Car Review Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo">Auto<span>Review</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="navMenu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="brands.html">Brands</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="submit.html" class="nav-btn">Write Review</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Find Your Perfect Car</h1>
+  <p>Honest reviews, expert opinions & real user experiences — all in one place</p>
+  <div class="hero-btns">
+    <a href="reviews.html" class="btn-primary">Browse Reviews</a>
+    <a href="submit.html" class="btn-outline">Write a Review</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div><div class="stat-num">2,400+</div><div class="stat-label">Car Reviews</div></div>
+    <div><div class="stat-num">180+</div><div class="stat-label">Car Models</div></div>
+    <div><div class="stat-num">50K+</div><div class="stat-label">Monthly Readers</div></div>
+    <div><div class="stat-num">4.8★</div><div class="stat-label">Avg. Trust Score</div></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section style="background:#f9f9f9;">
+  <div class="container">
+    <h2 class="section-title">Browse by Category</h2>
+    <p class="section-sub">Find reviews for every type of car</p>
+    <div class="categories-grid">
+      <a href="reviews.html?cat=suv" class="cat-card">
+        <div class="cat-icon">🚙</div>
+        <h3>SUV</h3>
+        <p>320+ reviews</p>
+      </a>
+      <a href="reviews.html?cat=sedan" class="cat-card">
+        <div class="cat-icon">🚗</div>
+        <h3>Sedan</h3>
+        <p>410+ reviews</p>
+      </a>
+      <a href="reviews.html?cat=hatchback" class="cat-card">
+        <div class="cat-icon">🚘</div>
+        <h3>Hatchback</h3>
+        <p>280+ reviews</p>
+      </a>
+      <a href="reviews.html?cat=electric" class="cat-card">
+        <div class="cat-icon">⚡</div>
+        <h3>Electric</h3>
+        <p>95+ reviews</p>
+      </a>
+      <a href="reviews.html?cat=luxury" class="cat-card">
+        <div class="cat-icon">💎</div>
+        <h3>Luxury</h3>
+        <p>150+ reviews</p>
+      </a>
+      <a href="reviews.html?cat=sports" class="cat-card">
+        <div class="cat-icon">🏎️</div>
+        <h3>Sports</h3>
+        <p>88+ reviews</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED CARS -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Featured Car Reviews</h2>
+    <p class="section-sub">Our editors' top picks this month</p>
+    <div class="cars-grid">
+
+      <div class="car-card">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600" alt="BMW 3 Series">
+        <div class="car-card-body">
+          <span class="car-badge">Editor's Pick</span>
+          <h3>BMW 3 Series 2024</h3>
+          <div class="car-meta">
+            <span>Sedan</span>
+            <span class="car-rating">★★★★★ 4.8</span>
+          </div>
+          <p>The BMW 3 Series continues to set the benchmark for sports sedans. Exceptional handling, a refined interior, and powerful engine options make it a top choice.</p>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-price">₹46.9 Lakh</span>
+          <a href="car-detail.html?id=bmw3" class="btn-sm">Read Review</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600" alt="Tata Nexon EV">
+        <div class="car-card-body">
+          <span class="car-badge">Best EV</span>
+          <h3>Tata Nexon EV 2024</h3>
+          <div class="car-meta">
+            <span>Electric SUV</span>
+            <span class="car-rating">★★★★☆ 4.5</span>
+          </div>
+          <p>India's best-selling electric SUV delivers impressive range, a feature-packed cabin, and strong performance — all at an accessible price point.</p>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-price">₹14.74 Lakh</span>
+          <a href="car-detail.html?id=nexonev" class="btn-sm">Read Review</a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600" alt="Hyundai Creta">
+        <div class="car-card-body">
+          <span class="car-badge">Best Seller</span>
+          <h3>Hyundai Creta 2024</h3>
+          <div class="car-meta">
+            <span>SUV</span>
+            <span class="car-rating">★★★★☆ 4.4</span>
+          </div>
+          <p>The Creta remains India's most popular SUV with its bold new design, panoramic sunroof, ADAS features, and multiple powertrain options.</p>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-price">₹11.11 Lakh</span>
+          <a href="car-detail.html?id=creta" class="btn-sm">Read Review</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LATEST USER REVIEWS -->
+<section style="background:#f9f9f9;">
+  <div class="container">
+    <h2 class="section-title">Latest User Reviews</h2>
+    <p class="section-sub">What real owners are saying</p>
+
+    <!-- Carousel wrapper -->
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev" id="carouselPrev">&#8592;</button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack"></div>
+      </div>
+      <button class="carousel-btn next" id="carouselNext">&#8594;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+
+    <div style="text-align:center;margin-top:28px;">
+      <a href="reviews.html" class="btn-primary">View All Reviews</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Why Trust AutoReview?</h2>
+    <p class="section-sub">We are India's most trusted car review platform</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🔍</div>
+        <h4>In-Depth Testing</h4>
+        <p>Every car is tested for 1000+ km across city, highway, and off-road conditions before we publish a review.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">👥</div>
+        <h4>Real Owner Reviews</h4>
+        <p>We collect verified reviews from actual car owners — no fake ratings, no paid promotions.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📊</div>
+        <h4>Data-Driven Ratings</h4>
+        <p>Our ratings are based on 20+ parameters including performance, comfort, safety, and value for money.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔄</div>
+        <h4>Always Updated</h4>
+        <p>We update our reviews with every new model year, facelift, and variant launch so you always get fresh info.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Auto<span>Review</span></a>
+      <p>India's most trusted car review platform. Helping you make smarter car buying decisions since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="reviews.html">All Reviews</a></li>
+        <li><a href="compare.html">Compare Cars</a></li>
+        <li><a href="submit.html">Write Review</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="reviews.html?cat=suv">SUV</a></li>
+        <li><a href="reviews.html?cat=sedan">Sedan</a></li>
+        <li><a href="reviews.html?cat=electric">Electric</a></li>
+        <li><a href="reviews.html?cat=luxury">Luxury</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Cancellation & Refund</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 AutoReview. All rights reserved.</span>
+    <span>Made with ❤️ for car lovers</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Force reload demo reviews if old data exists without proper fields
+  const existing = JSON.parse(localStorage.getItem('carReviews') || '[]');
+  if (existing.length && !existing[0].date) {
+    localStorage.removeItem('carReviews');
+    location.reload();
+  }
+</script>
+</body>
+</html>

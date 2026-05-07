@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Car Reviews — AutoReview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo">Auto<span>Review</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="brands.html">Brands</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="submit.html" class="nav-btn">Write Review</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>All Car Reviews</h1>
+  <p>Browse 2,400+ honest reviews from experts and real owners</p>
+</div>
+
+<section>
+  <div class="container">
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterReviews('all', this)">All</button>
+      <button class="filter-btn" onclick="filterReviews('suv', this)">SUV</button>
+      <button class="filter-btn" onclick="filterReviews('sedan', this)">Sedan</button>
+      <button class="filter-btn" onclick="filterReviews('hatchback', this)">Hatchback</button>
+      <button class="filter-btn" onclick="filterReviews('electric', this)">Electric</button>
+      <button class="filter-btn" onclick="filterReviews('luxury', this)">Luxury</button>
+      <button class="filter-btn" onclick="filterReviews('sports', this)">Sports</button>
+    </div>
+
+    <!-- User submitted reviews -->
+    <div id="userReviews"></div>
+
+    <!-- Static expert reviews grid -->
+    <div class="cars-grid" id="expertReviews">
+
+      <div class="car-card" data-cat="sedan">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600" alt="BMW 3 Series">
+        <div class="car-card-body">
+          <span class="car-badge">Sedan</span>
+          <h3>BMW 3 Series 2024</h3>
+          <div class="car-meta"><span>Petrol / Diesel</span><span class="car-rating">★★★★★ 4.8</span></div>
+          <p>The ultimate sports sedan with razor-sharp handling, a luxurious cabin, and cutting-edge technology. Sets the benchmark in its class.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹46.9 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="electric">
+        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600" alt="Tata Nexon EV">
+        <div class="car-card-body">
+          <span class="car-badge">Electric</span>
+          <h3>Tata Nexon EV 2024</h3>
+          <div class="car-meta"><span>Electric</span><span class="car-rating">★★★★☆ 4.5</span></div>
+          <p>India's best-selling EV with 465 km range, fast charging, and a feature-rich cabin. Best value electric SUV in India.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹14.74 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="suv">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600" alt="Hyundai Creta">
+        <div class="car-card-body">
+          <span class="car-badge">SUV</span>
+          <h3>Hyundai Creta 2024</h3>
+          <div class="car-meta"><span>Petrol / Diesel / CNG</span><span class="car-rating">★★★★☆ 4.4</span></div>
+          <p>India's most popular SUV with bold styling, panoramic sunroof, ADAS safety features, and multiple powertrain options.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹11.11 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="hatchback">
+        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600" alt="Maruti Swift">
+        <div class="car-card-body">
+          <span class="car-badge">Hatchback</span>
+          <h3>Maruti Suzuki Swift 2024</h3>
+          <div class="car-meta"><span>Petrol / CNG</span><span class="car-rating">★★★★★ 4.6</span></div>
+          <p>All-new Swift with a sporty design, 22 km/l fuel efficiency, and a peppy engine. The king of hatchbacks in India.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹6.49 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="suv">
+        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600" alt="Mahindra Scorpio-N">
+        <div class="car-card-body">
+          <span class="car-badge">SUV</span>
+          <h3>Mahindra Scorpio-N 2024</h3>
+          <div class="car-meta"><span>Petrol / Diesel</span><span class="car-rating">★★★★☆ 4.3</span></div>
+          <p>A true-blue SUV with a powerful diesel engine, 4WD capability, and a commanding road presence. Built for India's roads.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹13.99 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="luxury">
+        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=600" alt="Mercedes C-Class">
+        <div class="car-card-body">
+          <span class="car-badge">Luxury</span>
+          <h3>Mercedes-Benz C-Class 2024</h3>
+          <div class="car-meta"><span>Petrol</span><span class="car-rating">★★★★★ 4.9</span></div>
+          <p>The new C-Class brings S-Class luxury to a compact package. Stunning interior, smooth ride, and a massive MBUX screen.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹57.0 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="sedan">
+        <img src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=600" alt="Honda City">
+        <div class="car-card-body">
+          <span class="car-badge">Sedan</span>
+          <h3>Honda City 2024</h3>
+          <div class="car-meta"><span>Petrol / Hybrid</span><span class="car-rating">★★★★★ 4.7</span></div>
+          <p>The Honda City remains the benchmark mid-size sedan with its spacious cabin, refined engine, and excellent build quality.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹11.78 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="sports">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600" alt="Porsche 911">
+        <div class="car-card-body">
+          <span class="car-badge">Sports</span>
+          <h3>Porsche 911 Carrera 2024</h3>
+          <div class="car-meta"><span>Petrol</span><span class="car-rating">★★★★★ 5.0</span></div>
+          <p>The icon of sports cars. The 911 Carrera delivers breathtaking performance, timeless design, and everyday usability.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹1.89 Cr</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+      <div class="car-card" data-cat="electric">
+        <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600" alt="MG ZS EV">
+        <div class="car-card-body">
+          <span class="car-badge">Electric</span>
+          <h3>MG ZS EV 2024</h3>
+          <div class="car-meta"><span>Electric</span><span class="car-rating">★★★★☆ 4.2</span></div>
+          <p>Feature-loaded electric SUV with a 461 km range, panoramic sunroof, and a premium cabin at a competitive price.</p>
+        </div>
+        <div class="car-card-footer"><span class="car-price">₹18.98 Lakh</span><a href="#" class="btn-sm">Read More</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Auto<span>Review</span></a>
+      <p>India's most trusted car review platform. Helping you make smarter car buying decisions since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="reviews.html">All Reviews</a></li>
+        <li><a href="compare.html">Compare Cars</a></li>
+        <li><a href="submit.html">Write Review</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Cancellation & Refund</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 AutoReview. All rights reserved.</span>
+    <span>Made with ❤️ for car lovers</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function filterReviews(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#expertReviews .car-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// Brand filter from URL ?brand=
+const urlBrand = new URLSearchParams(location.search).get('brand');
+if (urlBrand) {
+  document.querySelector('.page-hero h1').textContent = urlBrand + ' Reviews';
+  document.querySelector('.page-hero p').textContent = 'All reviews for ' + urlBrand + ' cars';
+  // Hide expert cards that don't match brand
+  document.querySelectorAll('#expertReviews .car-card').forEach(card => {
+    const title = card.querySelector('h3').textContent;
+    card.style.display = title.toLowerCase().startsWith(urlBrand.toLowerCase()) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
