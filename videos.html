@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Videos — AutoReview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo">Auto<span>Review</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="brands.html">Brands</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="videos.html" class="active">Videos</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="submit.html" class="nav-btn">Write Review</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>🎬 Nawalgarh Cars Videos</h1>
+  <p>Latest car decoration & rating videos from our YouTube channel</p>
+</div>
+
+<section>
+  <div class="container">
+    <div id="loadingMsg" style="text-align:center;padding:60px;font-size:1.1rem;color:#888;">Loading videos...</div>
+    <div class="videos-grid" id="videosGrid"></div>
+    <div id="loadMoreWrap" style="text-align:center;margin-top:36px;display:none;">
+      <button class="btn-primary" id="loadMoreBtn" onclick="loadMore()">Load More Videos</button>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#111;color:#ccc;padding:30px 20px;text-align:center;margin-top:60px;">
+  <p>&copy; 2024 AutoReview. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  const API_KEY = 'AIzaSyBCR2D6slR5z9tK82rsNotgrclZClRtytM';
+  const CHANNEL_ID = 'UCs28xns9lJ_qXxgMxcV09Jw';
+  let nextPageToken = '';
+  let uploadsPlaylistId = '';
+
+  async function getUploadsPlaylist() {
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`);
+    const data = await res.json();
+    return data.items[0].contentDetails.relatedPlaylists.uploads;
+  }
+
+  async function fetchVideos(pageToken = '') {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&pageToken=${pageToken}&key=${API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    nextPageToken = data.nextPageToken || '';
+    return data.items;
+  }
+
+  function renderVideos(items) {
+    const grid = document.getElementById('videosGrid');
+    items.forEach(item => {
+      const v = item.snippet;
+      const videoId = v.resourceId.videoId;
+      const thumb = v.thumbnails.high ? v.thumbnails.high.url : v.thumbnails.medium.url;
+      const title = v.title;
+      const date = new Date(v.publishedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+          <div class="video-thumb">
+            <img src="${thumb}" alt="${title}" loading="lazy">
+            <div class="play-btn">▶</div>
+          </div>
+        </a>
+        <div class="video-info">
+          <h3>${title}</h3>
+          <div class="video-meta">
+            <span>📅 ${date}</span>
+            <span>▶ YouTube</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="btn-sm">Watch Now</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  async function loadMore() {
+    if (!nextPageToken) return;
+    const items = await fetchVideos(nextPageToken);
+    renderVideos(items);
+    if (!nextPageToken) document.getElementById('loadMoreWrap').style.display = 'none';
+  }
+
+  async function init() {
+    try {
+      uploadsPlaylistId = await getUploadsPlaylist();
+      const items = await fetchVideos();
+      document.getElementById('loadingMsg').style.display = 'none';
+      renderVideos(items);
+      if (nextPageToken) document.getElementById('loadMoreWrap').style.display = 'block';
+    } catch(e) {
+      document.getElementById('loadingMsg').textContent = 'Videos load nahi ho sake. Please refresh karein.';
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
