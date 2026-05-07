@@ -36,6 +36,49 @@
   </div>
 </section>
 
+<!-- SEARCH BAR -->
+<section class="search-section">
+  <div class="container">
+    <h2 class="section-title">Find Your Car</h2>
+    <p class="section-sub">Brand, model ya budget se search karein</p>
+    <div class="search-box">
+      <div class="search-fields">
+        <select id="searchBrand">
+          <option value="">Select Brand</option>
+          <option>Maruti Suzuki</option>
+          <option>Hyundai</option>
+          <option>Tata</option>
+          <option>Honda</option>
+          <option>Toyota</option>
+          <option>Kia</option>
+          <option>MG</option>
+          <option>BMW</option>
+          <option>Mercedes</option>
+          <option>Audi</option>
+        </select>
+        <select id="searchType">
+          <option value="">Car Type</option>
+          <option>SUV</option>
+          <option>Sedan</option>
+          <option>Hatchback</option>
+          <option>Electric</option>
+          <option>Luxury</option>
+          <option>Sports</option>
+        </select>
+        <select id="searchBudget">
+          <option value="">Budget</option>
+          <option>Under ₹5 Lakh</option>
+          <option>₹5 – ₹10 Lakh</option>
+          <option>₹10 – ₹20 Lakh</option>
+          <option>₹20 – ₹50 Lakh</option>
+          <option>Above ₹50 Lakh</option>
+        </select>
+        <a href="reviews.html" class="btn-primary search-btn">🔍 Search</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stats-grid">
@@ -45,6 +88,41 @@
     <div><div class="stat-num">4.8★</div><div class="stat-label">Avg. Trust Score</div></div>
   </div>
 </div>
+
+<!-- PRICE RANGE -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Browse by Budget</h2>
+    <p class="section-sub">Apne budget mein best cars dhundein</p>
+    <div class="price-grid">
+      <a href="reviews.html?budget=under5" class="price-card">
+        <div class="price-emoji">💰</div>
+        <div class="price-range">Under ₹5 Lakh</div>
+        <div class="price-desc">Entry-level & budget cars</div>
+      </a>
+      <a href="reviews.html?budget=5to10" class="price-card">
+        <div class="price-emoji">🚗</div>
+        <div class="price-range">₹5 – ₹10 Lakh</div>
+        <div class="price-desc">Most popular segment</div>
+      </a>
+      <a href="reviews.html?budget=10to20" class="price-card">
+        <div class="price-emoji">🚙</div>
+        <div class="price-range">₹10 – ₹20 Lakh</div>
+        <div class="price-desc">Feature-rich mid-range</div>
+      </a>
+      <a href="reviews.html?budget=20to50" class="price-card">
+        <div class="price-emoji">🏅</div>
+        <div class="price-range">₹20 – ₹50 Lakh</div>
+        <div class="price-desc">Premium & performance</div>
+      </a>
+      <a href="reviews.html?budget=above50" class="price-card">
+        <div class="price-emoji">👑</div>
+        <div class="price-range">Above ₹50 Lakh</div>
+        <div class="price-desc">Luxury & supercars</div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- CATEGORIES -->
 <section style="background:#f9f9f9;">
@@ -166,6 +244,53 @@
 
     <div style="text-align:center;margin-top:28px;">
       <a href="reviews.html" class="btn-primary">View All Reviews</a>
+    </div>
+  </div>
+</section>
+
+<!-- EMI CALCULATOR -->
+<section style="background:#f9f9f9;">
+  <div class="container">
+    <h2 class="section-title">EMI Calculator</h2>
+    <p class="section-sub">Apni monthly EMI abhi calculate karein</p>
+    <div class="emi-wrap">
+      <div class="emi-inputs">
+        <div class="emi-field">
+          <label>Car Price (₹)</label>
+          <input type="number" id="emiPrice" value="1000000" min="100000" step="50000">
+        </div>
+        <div class="emi-field">
+          <label>Down Payment (₹)</label>
+          <input type="number" id="emiDown" value="200000" min="0" step="10000">
+        </div>
+        <div class="emi-field">
+          <label>Interest Rate (% per year)</label>
+          <input type="number" id="emiRate" value="9" min="1" max="30" step="0.1">
+        </div>
+        <div class="emi-field">
+          <label>Loan Tenure (months)</label>
+          <input type="number" id="emiTenure" value="60" min="12" max="84" step="12">
+        </div>
+        <button class="btn-primary emi-calc-btn" onclick="calculateEMI()">Calculate EMI</button>
+      </div>
+      <div class="emi-result" id="emiResult">
+        <div class="emi-result-item">
+          <span>Monthly EMI</span>
+          <strong id="resEMI">₹ —</strong>
+        </div>
+        <div class="emi-result-item">
+          <span>Loan Amount</span>
+          <strong id="resLoan">₹ —</strong>
+        </div>
+        <div class="emi-result-item">
+          <span>Total Interest</span>
+          <strong id="resInterest">₹ —</strong>
+        </div>
+        <div class="emi-result-item total">
+          <span>Total Payment</span>
+          <strong id="resTotal">₹ —</strong>
+        </div>
+      </div>
     </div>
   </div>
 </section>

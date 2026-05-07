@@ -169,6 +169,35 @@ section { padding: 60px 20px; }
 .perk-card h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
 .perk-card p { font-size: 0.82rem; color: #777; }
 
+/* ── SEARCH SECTION ── */
+.search-section { background: #fff; padding: 40px 20px; }
+.search-box { background: #f8f8f8; border-radius: 10px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.search-fields { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; align-items: end; }
+.search-fields select { padding: 12px 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 0.95rem; background: #fff; cursor: pointer; }
+.search-fields select:focus { outline: none; border-color: #e63946; }
+.search-btn { padding: 12px 28px; white-space: nowrap; }
+
+/* ── PRICE RANGE ── */
+.price-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.price-card { background: #fff; border: 2px solid #eee; border-radius: 10px; padding: 24px 16px; text-align: center; text-decoration: none; color: #222; transition: all 0.2s; }
+.price-card:hover { border-color: #e63946; transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.price-emoji { font-size: 2rem; margin-bottom: 10px; }
+.price-range { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+.price-desc { font-size: 0.8rem; color: #888; }
+
+/* ── EMI CALCULATOR ── */
+.emi-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; background: #fff; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.emi-inputs { display: flex; flex-direction: column; gap: 16px; }
+.emi-field label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; color: #444; }
+.emi-field input { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 0.95rem; }
+.emi-field input:focus { outline: none; border-color: #e63946; }
+.emi-calc-btn { width: 100%; padding: 13px; font-size: 1rem; border: none; cursor: pointer; border-radius: 6px; font-family: inherit; }
+.emi-result { display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+.emi-result-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #f8f8f8; border-radius: 8px; font-size: 0.95rem; }
+.emi-result-item strong { font-size: 1.1rem; color: #111; }
+.emi-result-item.total { background: #e63946; color: #fff; }
+.emi-result-item.total strong { color: #fff; font-size: 1.3rem; }
+
 /* ── FOOTER ── */
 footer { background: #111; color: #ccc; padding: 50px 20px 20px; }
 .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
@@ -189,6 +218,16 @@ footer { background: #111; color: #ccc; padding: 50px 20px 20px; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px) {
+  /* Search */
+  .search-fields { grid-template-columns: 1fr; }
+  .search-btn { width: 100%; }
+
+  /* Price grid */
+  .price-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* EMI */
+  .emi-wrap { grid-template-columns: 1fr; }
+
   /* Navbar */
   .hamburger { display: flex; }
   nav ul {

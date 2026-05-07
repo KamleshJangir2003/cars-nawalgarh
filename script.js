@@ -1,3 +1,38 @@
+/* ── LOAD HEADER & FOOTER ── */
+function loadComponent(file, targetId) {
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      const el = document.getElementById(targetId);
+      if (el) el.outerHTML = html;
+      // Re-init hamburger after header loads
+      if (file === 'header.html') {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+          hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+          });
+          navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('open');
+          }));
+        }
+        // Set active link
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        navMenu.querySelectorAll('a').forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+}
+
+if (document.getElementById('header-placeholder')) loadComponent('header.html', 'header-placeholder');
+if (document.getElementById('footer-placeholder')) loadComponent('footer.html', 'footer-placeholder');
+
 /* ── HAMBURGER MENU ── */
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
@@ -223,6 +258,24 @@ function renderUserReviews(containerId) {
     </div>
     <hr style="margin:40px 0;">
   `;
+}
+
+/* ── EMI CALCULATOR ── */
+function calculateEMI() {
+  const price = parseFloat(document.getElementById('emiPrice').value) || 0;
+  const down = parseFloat(document.getElementById('emiDown').value) || 0;
+  const rate = parseFloat(document.getElementById('emiRate').value) / 12 / 100;
+  const tenure = parseInt(document.getElementById('emiTenure').value) || 1;
+  const loan = price - down;
+  if (loan <= 0 || rate <= 0) return;
+  const emi = (loan * rate * Math.pow(1 + rate, tenure)) / (Math.pow(1 + rate, tenure) - 1);
+  const total = emi * tenure;
+  const interest = total - loan;
+  const fmt = n => '₹ ' + Math.round(n).toLocaleString('en-IN');
+  document.getElementById('resEMI').textContent = fmt(emi);
+  document.getElementById('resLoan').textContent = fmt(loan);
+  document.getElementById('resInterest').textContent = fmt(interest);
+  document.getElementById('resTotal').textContent = fmt(total);
 }
 
 /* ── INIT ── */
