@@ -28,13 +28,47 @@
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>Find Your Perfect Car</h1>
-  <p>Honest reviews, expert opinions & real user experiences — all in one place</p>
-  <div class="hero-btns">
-    <a href="reviews.html" class="btn-primary">Browse Reviews</a>
-    <a href="submit.html" class="btn-outline">Write a Review</a>
+<section class="hero" style="padding:0;">
+  <div class="hero-slides">
+
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1400')">
+      <div class="hero-text">
+        <span class="hero-tag">🏆 India's #1 Car Review Platform</span>
+        <h1>Find Your Perfect Car</h1>
+        <p>Honest reviews, expert opinions & real user experiences — all in one place</p>
+        <div class="hero-btns">
+          <a href="reviews.html" class="btn-primary">Browse Reviews</a>
+          <a href="submit.html" class="btn-outline">Write a Review</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1400')">
+      <div class="hero-text">
+        <span class="hero-tag">🏎️ Sports & Performance</span>
+        <h1>Feel the Thrill of Every Drive</h1>
+        <p>In-depth reviews of India's top sports & performance cars — tested by experts</p>
+        <div class="hero-btns">
+          <a href="reviews.html?cat=sports" class="btn-primary">View Sports Cars</a>
+          <a href="compare.html" class="btn-outline">Compare Models</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1400')">
+      <div class="hero-text">
+        <span class="hero-tag">💎 Luxury Collection</span>
+        <h1>Experience True Luxury</h1>
+        <p>Explore premium & luxury car reviews — BMW, Mercedes, Audi & more</p>
+        <div class="hero-btns">
+          <a href="reviews.html?cat=luxury" class="btn-primary">Luxury Cars</a>
+          <a href="submit.html" class="btn-outline">Write a Review</a>
+        </div>
+      </div>
+    </div>
+
   </div>
+  <div class="hero-overlay"></div>
 </section>
 
 <!-- SEARCH BAR -->
@@ -382,6 +416,15 @@
     localStorage.removeItem('carReviews');
     location.reload();
   }
+
+  // Hero Slider
+  const slides = document.querySelectorAll('.hero-slide');
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 4500);
 </script>
 </body>
 </html>
